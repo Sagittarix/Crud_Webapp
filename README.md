@@ -21,12 +21,8 @@
 
 * Integration tests
 
-* UI
-    * view human details
-        * modal shows more info about the human 
-               
+* UI               
     * edit human
-        * add new human button becomes edit
         * opens modal to edit human
     
         

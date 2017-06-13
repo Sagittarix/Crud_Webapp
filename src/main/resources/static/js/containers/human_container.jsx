@@ -11,6 +11,11 @@ var HumanContainer = React.createClass({
        axios.get('/api/human')
            .then(function (response) {
                self.setState({human: response.data});
+           })
+           .catch(function (error) {
+               if(error !== null) {
+                   console.log(error.response);
+               }
            });
    },
 
@@ -19,12 +24,17 @@ var HumanContainer = React.createClass({
        axios.delete('/api/human/' + human.id)
            .then(function (response) {
                console.log(response);
-               if (response.status == 204) {
+               if (response.status === 204) {
                    self.componentWillMount();
+               } else {
+                   alert("Problem!");
                }
            })
            .catch(function (error) {
-               console.log(error.response);
+               if(error !== null) {
+                   console.log(error.response);
+               }
+
            });
    },
 
@@ -48,7 +58,7 @@ var HumanContainer = React.createClass({
                    </td>
 
                    <td>
-
+                            edit
                    </td>
 
                    <td>

@@ -3,52 +3,59 @@ var HumanAddModalContainer = React.createClass({
    getInitialState: function () {
        return {
            human: {},
-           name: '',
-           surname: '',
-           age: 0
        }
    },
 
+   componentWillMount: function () {
+       var humanMock = {
+           name: "aaa",
+           surname: "bbb",
+           age: 9,
+           id: null
+       };
+
+       this.setState({human: humanMock});
+   },
+
    handleName: function (e) {
-       console.log(e.target.value);
-       this.setState({name: e.target.value});
+       var humanName = this.state.human;
+       humanName.name = e.target.value;
+       this.setState({human: humanName});
    },
 
    handleSurname: function (e) {
-       console.log(e.target.value);
-       this.setState({surname: e.target.value});
+       var humanSurname = this.state.human;
+       humanSurname.surname = e.target.value;
+       this.setState({human: humanSurname});
    },
 
    handleAge: function (e) {
-       console.log(e.target.value);
-       this.setState({age: e.target.value});
+       var humanAge = this.state.human;
+       humanAge.age = e.target.value;
+       this.setState({human: humanAge});
    },
 
    handleAddHuman: function () {
        var self = this;
-       console.log("new");
-
-       this.state.human.name = this.state.name;
-       this.state.human.surname = this.state.surname;
-       this.state.human.age = this.state.age;
-
-       console.log(this.state.human);
-
        axios.post('/api/human', this.state.human)
            .then(function (response) {
                console.log(response);
-               if (response.status == 201) {
+               if (response.status === 201) {
                    $( "#modal_add").modal( 'hide' );
                    self.props.reload();
                }
            })
            .catch(function (error) {
-               if(error != null) {
-                   console.log(error.response);
+               if(error !== null) {
+                   console.log(error);
                }
-
            });
    },
+
+
+    //modal takes in human
+    //if human.id is null then create - add button
+    //if human.id is not null edit - edit button
 
    render: function () {
 
@@ -98,6 +105,7 @@ var HumanAddModalContainer = React.createClass({
                                    <input id="name"
                                           className="form-control"
                                           type="text"
+                                          value={self.state.human.name}
                                           onChange={self.handleName}
                                    /><br />
 
@@ -105,6 +113,7 @@ var HumanAddModalContainer = React.createClass({
                                    <input id="surname"
                                           className="form-control"
                                           type="text"
+                                          value={self.state.human.surname}
                                           onChange={self.handleSurname}
                                    /><br />
 
@@ -112,6 +121,7 @@ var HumanAddModalContainer = React.createClass({
                                    <input id="age"
                                           className="form-control"
                                           type="number"
+                                          value={self.state.human.age}
                                           onChange={self.handleAge}
                                    /><br />
 
