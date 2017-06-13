@@ -50,8 +50,8 @@ var HumanAddModalContainer = React.createClass({
                <button type="button"
                        className="btn btn-success"
                        data-toggle="modal"
-                       data-target={modalIdHash}>ADD
-                   HUMAN
+                       data-target={modalIdHash}>
+                   <span className="glyphicon glyphicon-plus"></span>
                </button>
                <div className="modal fade"
                     id={modalId}

@@ -1,5 +1,6 @@
 package crudwebapp.model;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,20 +31,24 @@ public class Human {
     private int age;
 
 
-
-    private List<Car> ownedCars;
-
+//    @ManyToMany
+//    @JoinTable(name="human_car") //owning
+//    private Collection<Car> ownedCars;
 
 
 
     public Human() {
     }
 
-    public Human(String name, String surname, int age, List<Car> ownedCars) {
+    public Human(
+            String name,
+            String surname,
+            int age/*,
+            Collection<Car> ownedCars*/) {
         this.name = name;
         this.surname = surname;
         this.age = age;
-        this.ownedCars = ownedCars;
+//        this.ownedCars = ownedCars;
     }
 
     public Long getId() {
@@ -76,11 +83,11 @@ public class Human {
         this.age = age;
     }
 
-    public List<Car> getOwnedCars() {
-        return ownedCars;
-    }
-
-    public void setOwnedCars(List<Car> ownedCars) {
-        this.ownedCars = ownedCars;
-    }
+//    public Collection<Car> getOwnedCars() {
+//        return ownedCars;
+//    }
+//
+//    public void setOwnedCars(Collection<Car> ownedCars) {
+//        this.ownedCars = ownedCars;
+//    }
 }
