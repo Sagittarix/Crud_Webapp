@@ -1,8 +1,8 @@
 package crudwebapp.model;
 
 import java.util.Collection;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +22,7 @@ public class Human {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
     private Long id;
     @Column
     private String name;
@@ -31,8 +32,7 @@ public class Human {
     private int age;
 
 
-//    @ManyToMany
-//    @JoinTable(name="human_car") //owning
+//    @ManyToMany(targetEntity = Car.class, cascade = CascadeType.ALL) //owning
 //    private Collection<Car> ownedCars;
 
 
