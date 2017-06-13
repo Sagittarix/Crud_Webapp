@@ -2,7 +2,7 @@ var HumanContainer = React.createClass({
 
    getInitialState: function () {
        return {
-           human: []
+           humans: []
        }
    },
 
@@ -10,7 +10,7 @@ var HumanContainer = React.createClass({
        var self = this;
        axios.get('/api/human')
            .then(function (response) {
-               self.setState({human: response.data});
+               self.setState({humans: response.data});
            })
            .catch(function (error) {
                if(error !== null) {
@@ -44,10 +44,7 @@ var HumanContainer = React.createClass({
        var modalId = "modal_add";
        var modalIdHash = "#modal_add";
 
-
-       var humanList = this.state.human.map(function (
-           human,
-           index) {
+       var humanList = this.state.humans.map(function (human, index) {
            return (
                <tr key={index}>
                    <td>{human.id}</td>
@@ -58,7 +55,8 @@ var HumanContainer = React.createClass({
                    </td>
 
                    <td>
-                            edit
+                       <HumanAddModalContainer man={human}
+                                               reload={self.componentWillMount()} />
                    </td>
 
                    <td>
@@ -76,7 +74,8 @@ var HumanContainer = React.createClass({
        return (
            <div>
                <div>
-                   <HumanAddModalContainer reload={self.componentWillMount()} />
+                   <HumanAddModalContainer man={null}
+                                           reload={self.componentWillMount()} />
                </div>
                <br/>
 
