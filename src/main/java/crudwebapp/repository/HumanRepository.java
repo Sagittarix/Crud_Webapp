@@ -11,7 +11,6 @@ import crudwebapp.model.Human;
  */
 public interface HumanRepository {
 
-    @SuppressWarnings("unchecked")
     List<Human> findAllHumans();
 
     Human findHumanById(Long id);

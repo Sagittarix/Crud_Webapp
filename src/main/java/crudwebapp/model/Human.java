@@ -1,5 +1,7 @@
 package crudwebapp.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,13 +27,21 @@ public class Human {
     @Column
     private int age;
 
+
+
+    private List<Car> ownedCars;
+
+
+
+
     public Human() {
     }
 
-    public Human(String name, String surname, int age) {
+    public Human(String name, String surname, int age, List<Car> ownedCars) {
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.ownedCars = ownedCars;
     }
 
     public Long getId() {
@@ -64,5 +74,13 @@ public class Human {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Car> getOwnedCars() {
+        return ownedCars;
+    }
+
+    public void setOwnedCars(List<Car> ownedCars) {
+        this.ownedCars = ownedCars;
     }
 }

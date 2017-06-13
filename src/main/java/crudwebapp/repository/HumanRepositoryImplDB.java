@@ -21,15 +21,14 @@ import crudwebapp.model.Human;
 
 @Repository
 public class HumanRepositoryImplDB implements HumanRepository {
-    private static final String FIND_ALL = "SELECT x FROM Human x";
+//    private static final String FIND_ALL = "SELECT x FROM Human x";
+//    return em.createQuery(FIND_ALL).getResultList();
 
     @Autowired
     private EntityManager em;
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<Human> findAllHumans() {
-//        return em.createQuery(FIND_ALL).getResultList();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Human> criteriaQuery = criteriaBuilder.createQuery(Human.class);
         Root<Human> humanRoot = criteriaQuery.from(Human.class);
@@ -69,69 +68,64 @@ public class HumanRepositoryImplDB implements HumanRepository {
         em.remove(human);
     }
 
-    /*
+/*
+@Override
+public List<EinvoiceContract> getEinvoiceContractsByFilter(
+                                            RegisterEinvoiceFilter registerEinvoiceFilter) {
+    Date now = dateFromFilter(registerEinvoiceFilter);
+
+    CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    CriteriaQuery<EinvoiceContract> criteriaQuery = criteriaBuilder
+                                                        .createQuery(EinvoiceContract.class);
+    Root<EinvoiceContract> einvoiceRoot = criteriaQuery.from(EinvoiceContract.class);
+    criteriaQuery.select(einvoiceRoot);
+    criteriaQuery.where(
+            criteriaBuilder.and(
+                    criteriaBuilder.equal(einvoiceRoot.get("status"),
+                                          registerEinvoiceFilter.getStatus()),
+                    criteriaBuilder.or(
+                            criteriaBuilder.isNull(einvoiceRoot.get("sentToTipCounter")),
+                            criteriaBuilder.lessThanOrEqualTo(einvoiceRoot
+                                                                      .get("sentToTipCounter"),
+                                    registerEinvoiceFilter.getNumberTimesToSend())
+                    ),
+                    criteriaBuilder.or(
+                            criteriaBuilder.isNull(einvoiceRoot.get("details")),
+                            criteriaBuilder.and(
+                                    criteriaBuilder.notLike(einvoiceRoot.get("details"),
+                                            "%" + registerEinvoiceFilter
+                                                    .getErrorToFilterOne() + "%"),
+                                    criteriaBuilder.notLike(einvoiceRoot.get("details"),
+                                            "%" + registerEinvoiceFilter
+                                                    .getErrorToFilterTwo() + "%")
+                            )
+                    ),
+                    criteriaBuilder.or(
+                            criteriaBuilder.isNull(einvoiceRoot.get("sentToTipDate")),
+                            criteriaBuilder.lessThan(einvoiceRoot.get("sentToTipDate"), now)
+                    )
+            )
+    );
 
 
+    criteriaQuery.orderBy(toOrders(registerEinvoiceFilter.getPageRequest().getSort(),
+                                   einvoiceRoot,
+                                   criteriaBuilder));
 
-    @Override
-    public List<EinvoiceContract> getEinvoiceContractsByFilter(
-                                                RegisterEinvoiceFilter registerEinvoiceFilter) {
-        Date now = dateFromFilter(registerEinvoiceFilter);
+    final TypedQuery<EinvoiceContract> query = entityManager
+            .createQuery(criteriaQuery)
+            .setFirstResult(registerEinvoiceFilter.getPageRequest().getPageNumber())
+            .setMaxResults(registerEinvoiceFilter.getPageRequest().getPageSize());
+    return query.getResultList();
+}
 
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<EinvoiceContract> criteriaQuery = criteriaBuilder
-                                                            .createQuery(EinvoiceContract.class);
-        Root<EinvoiceContract> einvoiceRoot = criteriaQuery.from(EinvoiceContract.class);
-        criteriaQuery.select(einvoiceRoot);
-        criteriaQuery.where(
-                criteriaBuilder.and(
-                        criteriaBuilder.equal(einvoiceRoot.get("status"),
-                                              registerEinvoiceFilter.getStatus()),
-                        criteriaBuilder.or(
-                                criteriaBuilder.isNull(einvoiceRoot.get("sentToTipCounter")),
-                                criteriaBuilder.lessThanOrEqualTo(einvoiceRoot
-                                                                          .get("sentToTipCounter"),
-                                        registerEinvoiceFilter.getNumberTimesToSend())
-                        ),
-                        criteriaBuilder.or(
-                                criteriaBuilder.isNull(einvoiceRoot.get("details")),
-                                criteriaBuilder.and(
-                                        criteriaBuilder.notLike(einvoiceRoot.get("details"),
-                                                "%" + registerEinvoiceFilter
-                                                        .getErrorToFilterOne() + "%"),
-                                        criteriaBuilder.notLike(einvoiceRoot.get("details"),
-                                                "%" + registerEinvoiceFilter
-                                                        .getErrorToFilterTwo() + "%")
-                                )
-                        ),
-                        criteriaBuilder.or(
-                                criteriaBuilder.isNull(einvoiceRoot.get("sentToTipDate")),
-                                criteriaBuilder.lessThan(einvoiceRoot.get("sentToTipDate"), now)
-                        )
-                )
-        );
-
-
-        criteriaQuery.orderBy(toOrders(registerEinvoiceFilter.getPageRequest().getSort(),
-                                       einvoiceRoot,
-                                       criteriaBuilder));
-
-        final TypedQuery<EinvoiceContract> query = entityManager
-                .createQuery(criteriaQuery)
-                .setFirstResult(registerEinvoiceFilter.getPageRequest().getPageNumber())
-                .setMaxResults(registerEinvoiceFilter.getPageRequest().getPageSize());
-        return query.getResultList();
-    }
-
-    private Date dateFromFilter(RegisterEinvoiceFilter registerEinvoiceFilter) {
-        ZoneOffset zoneOffset = systemDefault().getRules().getOffset(now());
-        return Date.from((registerEinvoiceFilter.getNow().minusHours(registerEinvoiceFilter
-                                                             .getNumberOfHoursBeforeNextRepeat()))
-                                 .toInstant(zoneOffset));
-    }
-
-
-     */
+private Date dateFromFilter(RegisterEinvoiceFilter registerEinvoiceFilter) {
+    ZoneOffset zoneOffset = systemDefault().getRules().getOffset(now());
+    return Date.from((registerEinvoiceFilter.getNow().minusHours(registerEinvoiceFilter
+                                                         .getNumberOfHoursBeforeNextRepeat()))
+                             .toInstant(zoneOffset));
+}
+*/
 
 
 
