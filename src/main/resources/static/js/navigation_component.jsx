@@ -1,7 +1,7 @@
 var Link = window.ReactRouter.Link;
 
-var NavLink = function( props, context ) {
-    var isActive = context.router.isActive( props.to );
+var NavLink = function (props, context) {
+    var isActive = context.router.isActive(props.to);
     var className = isActive ? 'active' : '';
 
     return (
@@ -22,14 +22,13 @@ NavLink.propTypes = {
     to: React.PropTypes.string.isRequired,
 };
 
-var NavigationComponent = React.createClass( {
-    render: function() {
+var NavigationComponent = React.createClass({
+    render: function () {
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <ul className="nav navbar-nav">
                         <NavLink to="/home" onlyActiveOnIndex>Home</NavLink>
-
                         <NavLink to="/human">HUMAN</NavLink>
                     </ul>
                 </div>

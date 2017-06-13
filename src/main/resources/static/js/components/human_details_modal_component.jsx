@@ -4,8 +4,8 @@ var HumanDetailsModalComponent = React.createClass({
        var self = this;
        var human = self.props.human;
        var humanId = human.id;
-       var modalId = "modal_details"+ humanId;
-       var modalIdHash = "#modal_details"+ humanId;
+       var modalId = "modal_details" + humanId;
+       var modalIdHash = "#modal_details" + humanId;
 
        return (
            <div>
@@ -30,8 +30,10 @@ var HumanDetailsModalComponent = React.createClass({
                                <button type="button"
                                        className="close"
                                        data-dismiss="modal">
-                                   <span aria-hidden="true">&times;</span>
-                                   <span className="sr-only">Close</span>
+                                   <span
+                                       aria-hidden="true">&times;</span>
+                                   <span
+                                       className="sr-only">Close</span>
                                </button>
 
                                <h4 className="modal-title"
@@ -42,25 +44,29 @@ var HumanDetailsModalComponent = React.createClass({
 
                            <div className="modal-body">
                                <div className="panel panel-default">
-                                   <table className="table table-hover">
+                                   <table
+                                       className="table table-hover">
                                        <thead>
                                        </thead>
                                        <tbody>
-                                           <tr>
-                                               <td>
-                                                   Name: <b>{human.name}</b>
-                                               </td>
-                                           </tr>
-                                           <tr>
-                                               <td>
-                                                   Surname: <b>{human.surname}</b>
-                                               </td>
-                                           </tr>
-                                           <tr>
-                                               <td>
-                                                   Age: <b>{human.age}</b>
-                                               </td>
-                                           </tr>
+                                       <tr>
+                                           <td>
+                                               Name:
+                                               <b>{human.name}</b>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               Surname:
+                                               <b>{human.surname}</b>
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                               Age:
+                                               <b>{human.age}</b>
+                                           </td>
+                                       </tr>
                                        </tbody>
                                    </table>
                                </div>

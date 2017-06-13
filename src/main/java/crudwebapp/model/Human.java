@@ -21,7 +21,7 @@ public class Human {
     @Column
     private String name;
     @Column
-    private String Surname;
+    private String surname;
     @Column
     private int age;
 
@@ -30,7 +30,7 @@ public class Human {
 
     public Human(String name, String surname, int age) {
         this.name = name;
-        Surname = surname;
+        this.surname = surname;
         this.age = age;
     }
 
@@ -51,11 +51,11 @@ public class Human {
     }
 
     public String getSurname() {
-        return Surname;
+        return surname;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        this.surname = surname;
     }
 
     public int getAge() {

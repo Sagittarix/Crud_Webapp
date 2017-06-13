@@ -17,7 +17,7 @@ public interface HumanRepository {
     Human findHumanById(Long id);
 
     @Transactional
-    Human createOrUpdateHuman(Human human);
+    void createOrUpdateHuman(Human human);
 
     @Transactional
     void deleteHuman(Long id);

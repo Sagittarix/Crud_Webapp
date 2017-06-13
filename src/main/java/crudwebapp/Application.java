@@ -38,7 +38,7 @@ public class Application {
 	}
 
 	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Rinkimu Sistema").version("0.0.1").build();
+		return new ApiInfoBuilder().title("Crud_Webapp").version("0.0.1").build();
 	}
 	/* =====swagger=== */
 

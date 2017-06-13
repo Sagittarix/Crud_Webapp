@@ -34,30 +34,30 @@ public class HumanController {
     @Autowired
     private HumanRepository humanRepository = new HumanRepositoryImplDB();
 
+    @ApiOperation(value = "Get all humans")
     @RequestMapping(method = GET)
     @ResponseStatus(OK)
-    @ApiOperation(value = "Get all humans")
     public List<Human> findAllHumans() {
         return humanRepository.findAllHumans();
     }
 
+    @ApiOperation(value = "Create or update human")
     @RequestMapping(method = POST)
     @ResponseStatus(CREATED)
-    @ApiOperation(value = "Create or update human")
-    public Human createOrUpdateHuman(@RequestBody Human human) { // return is optional
-        return humanRepository.createOrUpdateHuman(human);
+    public void createOrUpdateHuman(@RequestBody Human human) {
+        humanRepository.createOrUpdateHuman(human);
     }
 
+    @ApiOperation(value = "Get human by id")
     @RequestMapping(value = "/{id}", method = GET)
     @ResponseStatus(OK)
-    @ApiOperation(value = "Get human by id")
     public Human getHumanById(@PathVariable("id") Long id) {
         return humanRepository.findHumanById(id);
     }
 
+    @ApiOperation(value = "Delete human by id")
     @RequestMapping(value = "/{id}", method = DELETE)
     @ResponseStatus(NO_CONTENT)
-    @ApiOperation(value = "Delete human by id")
     public void deleteHumanById(@PathVariable("id") Long id) {
         humanRepository.deleteHuman(id);
     }

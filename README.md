@@ -19,11 +19,11 @@
 ###---===GOAL===---
 * Create inmemory and db variants
 
+* Expand Entities
+
 * Integration tests
 
 * UI               
-    * edit human
-        * opens modal to edit human
-    
+    * search    
         
     

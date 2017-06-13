@@ -4,15 +4,6 @@ var HumanAddModalContainer = React.createClass({
        return {
            human: {}
        }
-
-   },
-
-   componentWillMount: function () {
-
-    var human = this.props.man;
-        if(human != null) {
-            this.setState({human: human});
-        }
    },
 
    handleName: function (e) {
@@ -37,14 +28,13 @@ var HumanAddModalContainer = React.createClass({
        var self = this;
        axios.post('/api/human', this.state.human)
            .then(function (response) {
-               console.log(response);
                if (response.status === 201) {
-                   $( "#modal_add").modal( 'hide' );
+                   $("#modal_add").modal('hide');
                    self.props.reload();
                }
            })
            .catch(function (error) {
-               if(error !== null) {
+               if (error !== null) {
                    console.log(error);
                }
            });
@@ -52,27 +42,17 @@ var HumanAddModalContainer = React.createClass({
 
    render: function () {
        var self = this;
-       var modalActivateButton;
-       var modalId;
-       var modalIdHash;
-       var humanState = self.state.human;
-
-       if(humanState.id != null) {
-           modalId = "modal_add" + humanState.id;
-           modalIdHash = "#modal_add" + humanState.id;
-           modalActivateButton = <button type="button" className="btn btn-warning" data-toggle="modal" data-target={modalIdHash}><span className="glyphicon glyphicon-edit"></span></button>;
-       } else {
-           modalId = "modal_add";
-           modalIdHash = "#modal_add";
-           modalActivateButton = <button type="button" className="btn btn-success" data-toggle="modal" data-target={modalIdHash}>ADD HUMAN</button>;
-       }
-
-
-
+       var modalId = "modal_add";
+       var modalIdHash = "#modal_add";
 
        return (
            <div>
-               {modalActivateButton}
+               <button type="button"
+                       className="btn btn-success"
+                       data-toggle="modal"
+                       data-target={modalIdHash}>ADD
+                   HUMAN
+               </button>
                <div className="modal fade"
                     id={modalId}
                     tabIndex="1"
@@ -98,15 +78,11 @@ var HumanAddModalContainer = React.createClass({
                            </div>
 
                            <div className="modal-body">
-
-
                                <form>
-
                                    <label>Name</label>
                                    <input id="name"
                                           className="form-control"
                                           type="text"
-                                          value={self.state.human.name}
                                           onChange={self.handleName}
                                    /><br />
 
@@ -114,7 +90,6 @@ var HumanAddModalContainer = React.createClass({
                                    <input id="surname"
                                           className="form-control"
                                           type="text"
-                                          value={self.state.human.surname}
                                           onChange={self.handleSurname}
                                    /><br />
 
@@ -122,13 +97,9 @@ var HumanAddModalContainer = React.createClass({
                                    <input id="age"
                                           className="form-control"
                                           type="number"
-                                          value={self.state.human.age}
                                           onChange={self.handleAge}
                                    /><br />
-
                                </form>
-
-
                            </div>
                            <div className="modal-footer">
                                <button type="button"
