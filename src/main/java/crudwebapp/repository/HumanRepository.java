@@ -11,13 +11,13 @@ import crudwebapp.model.Human;
  */
 public interface HumanRepository {
 
-    List<Human> findAllHumans();
+    List<Human> findAll();
 
-    Human findHumanById(Long id);
-
-    @Transactional
-    void createOrUpdateHuman(Human human);
+    Human findById(Long id);
 
     @Transactional
-    void deleteHuman(Long id);
+    void createOrUpdate(Human human);
+
+    @Transactional
+    void delete(Long id);
 }

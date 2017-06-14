@@ -20,7 +20,7 @@ import crudwebapp.model.Human;
 
 
 @Repository
-public class HumanRepositoryImplDB implements HumanRepository {
+public class HumanRepositoryImpl implements HumanRepository {
 //    private static final String FIND_ALL = "SELECT x FROM Human x";
 //    return em.createQuery(FIND_ALL).getResultList();
 
@@ -28,7 +28,7 @@ public class HumanRepositoryImplDB implements HumanRepository {
     private EntityManager em;
 
     @Override
-    public List<Human> findAllHumans() {
+    public List<Human> findAll() {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Human> criteriaQuery = criteriaBuilder.createQuery(Human.class);
         Root<Human> humanRoot = criteriaQuery.from(Human.class);
@@ -41,7 +41,7 @@ public class HumanRepositoryImplDB implements HumanRepository {
     }
 
     @Override
-    public Human findHumanById(Long id) {
+    public Human findById(Long id) {
         Human human = em.find(Human.class, id);
         if (human != null) {
             return human;
@@ -52,7 +52,7 @@ public class HumanRepositoryImplDB implements HumanRepository {
 
     @Override
     @Transactional
-    public void createOrUpdateHuman(Human human) {
+    public void createOrUpdate(Human human) {
         if (human.getId() == null) {
             em.persist(human);
         } else {
@@ -63,7 +63,7 @@ public class HumanRepositoryImplDB implements HumanRepository {
 
     @Override
     @Transactional
-    public void deleteHuman(Long id) {
+    public void delete(Long id) {
         Human human = em.find(Human.class, id);
         em.remove(human);
     }
