@@ -1,6 +1,5 @@
 package crudwebapp.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,7 +12,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import crudwebapp.model.Car;
 import crudwebapp.model.Human;
 
 /**
@@ -56,15 +54,6 @@ public class HumanRepositoryImplDB implements HumanRepository {
     @Transactional
     public void createOrUpdateHuman(Human human) {
         if (human.getId() == null) {
-
-//            Car car = new Car();
-//            car.setPlateNumber("LTU666");
-//            List<Car> carList = new ArrayList<>();
-//            carList.add(car);
-//
-//            human.setOwnedCars(carList);
-
-
             em.persist(human);
         } else {
             Human merged = em.merge(human);

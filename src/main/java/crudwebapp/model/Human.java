@@ -1,6 +1,6 @@
 package crudwebapp.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -22,34 +21,17 @@ public class Human {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
     private Long id;
-    @Column
     private String name;
-    @Column
     private String surname;
-    @Column
     private int age;
 
-
-//    @ManyToMany(targetEntity = Car.class, cascade = CascadeType.ALL) //owning
-//    private Collection<Car> ownedCars;
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Book> borrowedBooks;
 
 
-    public Human() {
-    }
+    /*===============================================*/
 
-    public Human(
-            String name,
-            String surname,
-            int age/*,
-            Collection<Car> ownedCars*/) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
-//        this.ownedCars = ownedCars;
-    }
 
     public Long getId() {
         return id;
@@ -83,11 +65,11 @@ public class Human {
         this.age = age;
     }
 
-//    public Collection<Car> getOwnedCars() {
-//        return ownedCars;
-//    }
-//
-//    public void setOwnedCars(Collection<Car> ownedCars) {
-//        this.ownedCars = ownedCars;
-//    }
+    public List<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    public void setBorrowedBooks(List<Book> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
 }
