@@ -23,7 +23,6 @@ public class Human {
 
     /*===============================================*/
 
-
     public Long getId() {
         return id;
     }
