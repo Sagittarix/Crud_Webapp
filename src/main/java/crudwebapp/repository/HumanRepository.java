@@ -1,23 +1,19 @@
 package crudwebapp.repository;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 import crudwebapp.model.Human;
+import crudwebapp.repository.generic.GenericRepository;
 
 /**
  * Created by arnoldas on 17.6.12.
  */
-public interface HumanRepository {
 
-    List<Human> findAll();
+@Repository
+public class HumanRepository extends GenericRepository<Human> {
 
-    Human findById(Long id);
-
-    @Transactional
-    void createOrUpdate(Human human);
-
-    @Transactional
-    void delete(Long id);
+    public HumanRepository() {
+        super(Human.class);
+    }
 }
+

@@ -37,7 +37,7 @@ public class LibraryController {
     @RequestMapping(value = "/{id}", method = GET)
     @ResponseStatus(OK)
     public Library getLibraryById(@PathVariable("id") Long id) {
-        return libraryRepository.findById(id);
+        return libraryRepository.find(id);
     }
 }
 

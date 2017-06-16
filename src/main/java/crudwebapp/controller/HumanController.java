@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import crudwebapp.model.Human;
 import crudwebapp.repository.HumanRepository;
-import crudwebapp.repository.HumanRepositoryImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -32,7 +31,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class HumanController {
 
     @Autowired
-    private HumanRepository humanRepository = new HumanRepositoryImpl();
+    private HumanRepository humanRepository;
 
     @ApiOperation(value = "Get all humans")
     @RequestMapping(method = GET)
@@ -52,7 +51,7 @@ public class HumanController {
     @RequestMapping(value = "/{id}", method = GET)
     @ResponseStatus(OK)
     public Human getHumanById(@PathVariable("id") Long id) {
-        return humanRepository.findById(id);
+        return humanRepository.find(id);
     }
 
     @ApiOperation(value = "Delete human by id")

@@ -1,4 +1,4 @@
-package crudwebapp.repository;
+package crudwebapp.repository.generic;
 
 import java.util.List;
 
@@ -10,63 +10,62 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-import crudwebapp.model.Human;
+import crudwebapp.model.generic.GenericEntity;
 
 /**
- * Created by arnoldas on 17.6.12.
+ * Created by arnoldas on 17.6.16.
  */
-
-
-@Repository
-public class HumanRepositoryImpl implements HumanRepository {
-//    private static final String FIND_ALL = "SELECT x FROM Human x";
-//    return em.createQuery(FIND_ALL).getResultList();
+public abstract class GenericRepository<T extends GenericEntity> { //nurodome kad klase dirbs
+// su kitomis klasemis kurios yra "bet koks tipas kuris extendina GenericEntity"
 
     @Autowired
     private EntityManager em;
+    private Class<T> type;
 
-    @Override
-    public List<Human> findAll() {
+    public GenericRepository(Class<T> type) {
+        this.type = type;
+    }
+
+    @Transactional
+    public T createOrUpdate(T t) {
+        if(t.getId() != null && find(t.getId()) != null) {
+            return em.merge(t);
+        } else {
+            em.persist(t);
+            return t;
+        }
+    }
+
+    @Transactional
+    public T delete(Long id) {
+        T t = em.find(type, id);
+        em.remove(t);
+        return t;
+    }
+
+    public T find(Long id) {
+        return em.find(type, id);
+    }
+
+    public List<T> findAll() {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Human> criteriaQuery = criteriaBuilder.createQuery(Human.class);
-        Root<Human> humanRoot = criteriaQuery.from(Human.class);
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
+        Root<T> root = criteriaQuery.from(type);
 
-        criteriaQuery.select(humanRoot);
-        criteriaQuery.where(criteriaBuilder.isNotNull(humanRoot.get("id")));
+        criteriaQuery.select(root);
+        criteriaQuery.where(criteriaBuilder.isNotNull(root.get("id")));
 
-        final TypedQuery<Human> query = em.createQuery(criteriaQuery);
+        final TypedQuery<T> query = em.createQuery(criteriaQuery);
         return query.getResultList();
+
+//    private static final String FIND_ALL = "SELECT x FROM Human x";
+//    return em.createQuery(FIND_ALL).getResultList();
     }
 
-    @Override
-    public Human findById(Long id) {
-        Human human = em.find(Human.class, id);
-        if (human != null) {
-            return human;
-        } else {
-            return null;
-        }
-    }
 
-    @Override
-    @Transactional
-    public void createOrUpdate(Human human) {
-        if (human.getId() == null) {
-            em.persist(human);
-        } else {
-            Human merged = em.merge(human);
-            em.persist(merged);
-        }
-    }
+}
 
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        Human human = em.find(Human.class, id);
-        em.remove(human);
-    }
 
 /*
 @Override
@@ -126,11 +125,3 @@ private Date dateFromFilter(RegisterEinvoiceFilter registerEinvoiceFilter) {
                              .toInstant(zoneOffset));
 }
 */
-
-
-
-
-
-
-}
-

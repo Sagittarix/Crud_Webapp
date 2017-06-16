@@ -1,21 +1,14 @@
 package crudwebapp.repository;
 
-import java.util.List;
-
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import crudwebapp.model.Book;
+import crudwebapp.repository.generic.GenericRepository;
 
-/**
- * Created by arnoldas on 17.6.14.
- */
-public interface BookRepository {
-    @Transactional
-    Book createOrUpdate(Book book);
+@Repository
+public class BookRepository extends GenericRepository<Book> {
 
-    Book findById(Long bookId);
-
-    List<Book> findAll();
-
-    void delete(Long id);
+    public BookRepository() {
+        super(Book.class);
+    }
 }

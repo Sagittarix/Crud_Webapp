@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import crudwebapp.model.Book;
 import crudwebapp.repository.BookRepository;
-import crudwebapp.repository.BookRepositoryImpl;
 import io.swagger.annotations.Api;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -31,7 +30,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class BookController {
 
     @Autowired
-    private BookRepository bookRepository = new BookRepositoryImpl();
+    private BookRepository bookRepository;
 
     @RequestMapping(method = GET)
     @ResponseStatus(OK)
@@ -48,7 +47,7 @@ public class BookController {
     @RequestMapping(value = "/{id}", method = GET)
     @ResponseStatus(OK)
     public Book getHumanById(@PathVariable("id") Long id) {
-        return bookRepository.findById(id);
+        return bookRepository.find(id);
     }
 
     @RequestMapping(value = "/{id}", method = DELETE)

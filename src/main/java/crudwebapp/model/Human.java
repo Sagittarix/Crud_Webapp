@@ -1,10 +1,9 @@
 package crudwebapp.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
+
+import crudwebapp.model.generic.GenericEntity;
 
 /**
  * Created by arnoldas on 17.6.12.
@@ -12,25 +11,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "human")
-public class Human {
+public class Human extends GenericEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String name;
     private String surname;
     private int age;
 
+
+
     /*===============================================*/
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
