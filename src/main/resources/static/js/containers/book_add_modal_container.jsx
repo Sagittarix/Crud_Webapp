@@ -40,7 +40,7 @@ var BookAddModalContainer = React.createClass({
        var modalIdHash = "#modal_add";
 
        return (
-           <div>
+           <span>
                <button type="button"
                        className="btn btn-success"
                        data-toggle="modal"
@@ -103,7 +103,7 @@ var BookAddModalContainer = React.createClass({
                        </div>
                    </div>
                </div>
-           </div>
+           </span>
        )
    }
 });

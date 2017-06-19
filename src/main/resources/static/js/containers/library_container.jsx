@@ -23,6 +23,19 @@ var LibraryContainer = React.createClass({
            });
    },
 
+   handleRemoveFromLibrary: function (book) {
+       var self = this;
+       axios.post('/api/library/d', book)
+           .then(function (response) {
+               self.componentWillMount();
+           })
+           .catch(function (error) {
+               if (error != null) {
+                   console.log(error);
+               }
+           });
+   },
+
    render: function () {
        var self = this;
        var library = self.state.library;
@@ -33,6 +46,13 @@ var LibraryContainer = React.createClass({
                    <tr key={index}>
                        <td>{book.title}</td>
                        <td>{book.author}</td>
+                       <td>
+                           <button type="button"
+                                   className="btn btn-danger"
+                                   onClick={self.handleRemoveFromLibrary.bind(self, book)}>
+                               <span className="glyphicon glyphicon-remove"></span>
+                           </button>
+                       </td>
                    </tr>
                );
            });
@@ -41,7 +61,6 @@ var LibraryContainer = React.createClass({
 
        var create;
        if(library.name == null) {
-           console.log(library.name);
            create = <LibraryAddModalContainer reload={self.refresh}/>;
        }
 
@@ -67,6 +86,7 @@ var LibraryContainer = React.createClass({
                        <tr>
                            <th>Title</th>
                            <th>Author</th>
+                           <th>Remove</th>
                        </tr>
                        </thead>
                        <tbody>

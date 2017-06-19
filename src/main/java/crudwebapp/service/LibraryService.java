@@ -1,5 +1,8 @@
 package crudwebapp.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +27,26 @@ public class LibraryService {
     private BookRepository bookRepository;
 
     @Transactional
-    public void addBookToLibrary(Long id, Book book) {
+    public void addBookToLibrary(Long id, List<Book> books) {
 
-    Book savedBook = bookRepository.createOrUpdate(book); //in case book does not exist
-    Library library = libraryRepository.find(id);
-    library.getBooks().add(savedBook);
+        for (Book book : books) {
+            Book savedBook = bookRepository.createOrUpdate(book); //in case book does not exist
+            Library library = libraryRepository.find(id);
+            if(library.getBooks().stream().filter(b -> b.equals(book)).count() == 0) {
+                library.getBooks().add(savedBook);
+            }
+            libraryRepository.createOrUpdate(library);
+        }
     }
 
+    @Transactional
+    public void removeBookFromLibrary(Long id, Book book) {
+            Library library = libraryRepository.find(id);
 
-
-
+            library.setBooks(library.getBooks()
+                                    .stream()
+                                    .filter(b -> !b.equals(book))
+                                    .collect(Collectors.toList()));
+            libraryRepository.createOrUpdate(library);
+    }
 }

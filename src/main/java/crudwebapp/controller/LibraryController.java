@@ -1,5 +1,7 @@
 package crudwebapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +16,9 @@ import crudwebapp.service.LibraryService;
 import io.swagger.annotations.Api;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -47,9 +51,15 @@ public class LibraryController {
 
     @RequestMapping(value = "/{id}", method = POST)
     @ResponseStatus(CREATED)
-    public void addBookToLibrary(@PathVariable("id") Long id, @RequestBody Book book) {
+    public void addBookToLibrary(@PathVariable("id") Long id, @RequestBody List<Book> books) {
 
-        libraryService.addBookToLibrary(id, book);
+        libraryService.addBookToLibrary(id, books);
+    }
+
+    @RequestMapping(value = "/d", method = POST)
+    @ResponseStatus(NO_CONTENT)
+    public void removeBookFromLibrary(@RequestBody Book book) {
+        libraryService.removeBookFromLibrary(1L, book);
     }
 
 
