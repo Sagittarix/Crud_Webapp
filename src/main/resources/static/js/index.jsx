@@ -24,8 +24,9 @@ ReactDOM.render((
     <Router history={hashHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={NoMatch}/>
+            <Route path="/library" component={LibraryContainer}/>
             <Route path="/human" component={HumanContainer}/>
-            <Route path="/books" component={NoMatch}/>
+            <Route path="/books" component={BookContainer}/>
             <Route path="*" component={NoMatch}/>
         </Route>
     </Router>

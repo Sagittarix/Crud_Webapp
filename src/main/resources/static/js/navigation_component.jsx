@@ -29,8 +29,8 @@ var NavigationComponent = React.createClass({
                 <div className="container-fluid">
                     <ul className="nav navbar-nav">
                         <NavLink to="/library" onlyActiveOnIndex>LIBRARY</NavLink>
-                        <NavLink to="/human">HUMAN</NavLink>
                         <NavLink to="/books">BOOKS</NavLink>
+                        <NavLink to="/human">HUMAN</NavLink>
                     </ul>
                 </div>
             </nav>
