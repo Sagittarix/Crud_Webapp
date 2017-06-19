@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import crudwebapp.model.Book;
 import crudwebapp.model.Library;
 import crudwebapp.repository.LibraryRepository;
+import crudwebapp.service.LibraryService;
 import io.swagger.annotations.Api;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -28,6 +30,9 @@ public class LibraryController {
     @Autowired
     private LibraryRepository libraryRepository;
 
+    @Autowired
+    private LibraryService libraryService;
+
     @RequestMapping(method = POST)
     @ResponseStatus(CREATED)
     public void createOrUpdateLibrary(@RequestBody Library library) {
@@ -39,5 +44,18 @@ public class LibraryController {
     public Library getLibraryById(@PathVariable("id") Long id) {
         return libraryRepository.find(id);
     }
+
+    @RequestMapping(value = "/{id}", method = POST)
+    @ResponseStatus(CREATED)
+    public void addBookToLibrary(@PathVariable("id") Long id, @RequestBody Book book) {
+
+        libraryService.addBookToLibrary(id, book);
+    }
+
+
+
+
+
+
 }
 

@@ -1,9 +1,9 @@
 package crudwebapp.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import crudwebapp.model.generic.GenericEntity;
@@ -17,8 +17,10 @@ public class Library extends GenericEntity {
     // Library - One to Many - Books
     // creates a separate table where Library id's and book id's are connected
     // books are added by adding book obejects to library object
+
     @OneToMany
-    private Collection<Book> books = new ArrayList<>();
+//    @JoinColumn(name = "library_id") by adding this, library id will be created in table books
+    private List<Book> books;
 
 
 
@@ -31,12 +33,11 @@ public class Library extends GenericEntity {
         this.name = name;
     }
 
-    public Collection<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Collection<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
     }
-
 }
